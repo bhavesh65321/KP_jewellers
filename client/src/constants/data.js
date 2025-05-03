@@ -3,25 +3,25 @@ export const products = [
     id: 1,
     name: "Gold Necklace",
     price: "$1,299",
-    image: "https://images.unsplash.com/photo-1615909471021-9ceff3b3dba6",
+    image: "https://bindhani.in/cdn/shop/files/SHJWST00488White_AMain.jpg?v=1745644763",
   },
   {
     id: 2,
     name: "Diamond Ring",
     price: "$899",
-    image: "https://images.unsplash.com/photo-1608451643043-030423f6f394",
+    image: "https://www.orra.co.in/media/catalog/product/cache/8706a87b250cd4797f5bf599698c5c7a/o/n/ons23036.jpg",
   },
   {
     id: 3,
     name: "Pearl Earrings",
     price: "$499",
-    image: "https://images.unsplash.com/photo-1609331251721-7ff3dce7e2bb",
+    image: "https://5.imimg.com/data5/SELLER/Default/2023/7/329719120/JS/DB/AG/159007652/artificial-jewellery-1000x1000.jpg",
   },
   {
     id: 4,
     name: "Silver Bracelet",
     price: "$299",
-    image: "https://images.unsplash.com/photo-1601373875554-f43f7fdee3bb",
+    image: "https://www.pateljewellers.com/pub/media/catalog/category/10_Aug_63_-_n2n.jpg",
   },
 ];
 
