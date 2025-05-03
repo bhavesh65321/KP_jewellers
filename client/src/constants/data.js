@@ -26,3 +26,10 @@ export const products = [
 ];
 
 export const categories = ["Necklaces", "Rings", "Earrings", "Bracelets"];
+
+export const navItems = [
+  { name: "Home", link: "#" },
+  { name: "Shop", link: "#" },
+  { name: "About", link: "#" },
+  { name: "Contact", link: "#" },
+];
