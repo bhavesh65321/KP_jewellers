@@ -1,23 +1,68 @@
-import React from "react";
+import { useRef } from "react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { categories } from "../constants/data";
+import SectionHeading from "./SectionHeading";
 
 const Categories = () => {
+  const scrollRef = useRef(null);
+
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const scrollAmount = 300;
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <section className="py-12 bg-white">
-      <h2 className="text-2xl md:text-3xl font-semibold text-center mb-8">
-        Shop by Category
-      </h2>
-      <div className="flex justify-center flex-wrap gap-6">
-        {categories.map((cat, index) => (
-          <div
-            key={index}
-            className="px-6 py-3 border rounded-lg hover:bg-pink-100 cursor-pointer"
-          >
-            {cat}
-          </div>
-        ))}
+    <div className="flex flex-col gap-6 bg-amber-50">
+      <SectionHeading title="Categories" />
+
+      <div className="relative w-full px-4 py-6">
+        {/* Left arrow */}
+        <button
+          onClick={() => scroll("left")}
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full shadow p-2 hover:bg-gray-200"
+        >
+          <FaArrowLeft size={24} />
+        </button>
+
+        {/* Scrollable container */}
+        <div
+          ref={scrollRef}
+          className="flex gap-6 overflow-x-auto scrollbar-hide px-8"
+        >
+          {categories.map((cat, idx) => (
+            <div
+              key={idx}
+              className="flex flex-col items-center group cursor-pointer transition-transform duration-300"
+            >
+              <div className="w-60 h-60 rounded-full overflow-hidden border-8 border-amber-300 shadow-md">
+                <img
+                  src={cat.img}
+                  alt={cat.name}
+                  className="w-full h-full object-cover transform transition-transform duration-300 ease-in-out group-hover:scale-110"
+                />
+              </div>
+              <div className="mt-2 opacity-0 group-hover:opacity-100 transition-all duration-300 text-2xl font-semibold text-amber-800 flex items-center gap-8">
+                {cat.name}
+                <FaArrowRight size={24} />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Right arrow */}
+        <button
+          onClick={() => scroll("right")}
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full shadow p-2 hover:bg-gray-200"
+        >
+          <FaArrowRight size={24} />
+        </button>
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -1,55 +1,63 @@
 import React from "react";
+import {
+  FaMapMarkerAlt,
+  FaWhatsapp,
+  FaPhone,
+  FaEnvelope,
+} from "react-icons/fa";
+import IconButton from "./IconButton";
 import { navItems } from "../constants/data";
 
-export default function Header() {
+const Header = () => {
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <div className="text-2xl font-bold text-pink-600 tracking-wide">
-          KP <span className="text-gray-800">Jewellers</span>
+    <header className="sticky top-0 z-50 bg-yellow-400 border-b border-yellow-200 text-yellow-900">
+      {/* Top Bar */}
+      <div className="flex flex-col md:flex-row items-center justify-between px-6 py-4">
+        {/* Left - Location & Email */}
+        <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-2">
+            <FaMapMarkerAlt className="text-yellow-800" />
+            <span>Pune, India</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <FaEnvelope className="text-yellow-800" />
+            <span>support@kpjewellers.com</span>
+          </div>
         </div>
 
-        {/* Navigation */}
-        <nav className="hidden md:flex space-x-8 text-gray-700 font-medium">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.link}
-              className="hover:text-pink-600 transition"
-            >
-              {item.name}
-            </a>
-          ))}
-        </nav>
-
-        {/* Search Bar */}
-        <div className="hidden md:flex flex-grow max-w-xs">
-          <input
-            type="text"
-            placeholder="Search for products..."
-            className="w-full px-4 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:ring-2 focus:ring-pink-600"
-          />
+        {/* Center - Brand */}
+        <div className="text-2xl md:text-3xl font-serif font-bold tracking-wide text-yellow-900 text-center">
+          KP JEWELLERS
         </div>
 
-        {/* Actions */}
-        <div className="flex items-center space-x-4">
-          <button className="relative group hover:cursor-pointer">
-            <span role="img" aria-label="cart">
-              🛍️
-            </span>
-            <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-xs px-1 rounded-full">
-              2
-            </span>
-          </button>
-          <button className="flex items-center gap-2 px-4 py-2 border border-pink-600 text-pink-600 rounded-full hover:bg-pink-600 hover:text-white hover:cursor-pointer transition">
-            <span role="img" aria-label="user">
-              👤
-            </span>
-            Login
-          </button>
+        {/* Right - Icons */}
+        <div className="flex items-center space-x-4 mt-2 md:mt-0">
+          <div className="hidden md:flex flex-grow max-w-xs">
+            <input
+              type="text"
+              placeholder="Search for products..."
+              className="w-full px-4 py-2 border bg-amber-200 border-gray-300 rounded-l-full focus:outline-none focus:ring-2 focus:ring-amber-600"
+            />
+          </div>
+          <IconButton icon={FaWhatsapp} label="WhatsApp" />
+          <IconButton icon={FaPhone} label="Call" />
         </div>
       </div>
+
+      {/* Bottom Navigation */}
+      <nav className="bg-amber-50 text-yellow-900 px-4 py-3 flex flex-wrap justify-center gap-8 shadow-sm">
+        {navItems.map((item, idx) => (
+          <a
+            key={idx}
+            href={item.href}
+            className="hover:underline hover:font-bold hover:italic hover:text-yellow-700 transition duration-300"
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
     </header>
   );
-}
+};
+
+export default Header;

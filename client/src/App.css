@@ -1,0 +1,18 @@
+/* carousel.css */
+.slick-dots li button:before {
+  font-size: 18px; 
+}
+
+.slick-dots li.slick-active button:before {
+  font-size: 18px;
+  color: #facc15; 
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
