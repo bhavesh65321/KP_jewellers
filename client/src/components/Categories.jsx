@@ -24,9 +24,9 @@ const Categories = () => {
         {/* Left arrow */}
         <button
           onClick={() => scroll("left")}
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full shadow p-2 hover:bg-gray-200"
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full shadow p-2 hover:cursor-pointer hover:bg-amber-200"
         >
-          <FaArrowLeft size={24} />
+          <FaArrowLeft size={24} color="goldenrod" />
         </button>
 
         {/* Scrollable container */}
@@ -57,9 +57,9 @@ const Categories = () => {
         {/* Right arrow */}
         <button
           onClick={() => scroll("right")}
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full shadow p-2 hover:bg-gray-200"
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full shadow p-2 hover:cursor-pointer hover:bg-amber-200"
         >
-          <FaArrowRight size={24} />
+          <FaArrowRight size={24} color="goldenrod" />
         </button>
       </div>
     </div>
