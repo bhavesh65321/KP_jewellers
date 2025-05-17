@@ -69,15 +69,75 @@ export const categories = [
 ];
 
 export const navItems = [
-  { label: "Rings", href: "#" },
-  { label: "Earrings", href: "#" },
-  { label: "Pendants", href: "#" },
-  { label: "All Jewellery", href: "#" },
-  { label: "Collections", href: "#" },
-  { label: "Gifts", href: "#" },
-  { label: "Ready to Ship", href: "#" },
-  { label: "10+1 Monthly Plan", href: "#" },
-  { label: "Locate Our Store", href: "#" },
+  {
+    label: "Rings",
+    href: "#",
+    children: [
+      { label: "Gold Rings", href: "#" },
+      { label: "Diamond Rings", href: "#" },
+      { label: "Silver Rings", href: "#" },
+    ],
+  },
+  {
+    label: "Earrings",
+    href: "#",
+    children: [
+      { label: "Gold Earrings", href: "#" },
+      { label: "Diamond Earrings", href: "#" },
+      { label: "Silver Earrings", href: "#" },
+    ],
+  },
+  {
+    label: "Pendants",
+    href: "#",
+    children: [
+      { label: "Gold Pendants", href: "#" },
+      { label: "Diamond Pendants", href: "#" },
+      { label: "Silver Pendants", href: "#" },
+    ],
+  },
+  {
+    label: "All Jewellery",
+    href: "#",
+    children: [
+      { label: "Gold Jewellery", href: "#" },
+      { label: "Diamond Jewellery", href: "#" },
+      { label: "Silver Jewellery", href: "#" },
+    ],
+  },
+  {
+    label: "Collections",
+    href: "#",
+    children: [
+      { label: "Gold Collections", href: "#" },
+      { label: "Diamond Collections", href: "#" },
+      { label: "Silver Collections", href: "#" },
+    ],
+  },
+  {
+    label: "Gifts",
+    href: "#",
+    children: [],
+  },
+  {
+    label: "Ready to Ship",
+    href: "#",
+    children: [
+      { label: "Gold Ready to Ship", href: "#" },
+      { label: "Diamond Ready to Ship", href: "#" },
+      { label: "Silver Ready to Ship", href: "#" },
+    ],
+  },
+  {
+    label: "10+1 Monthly Plan",
+    href: "#",
+    children: [],
+  },
+  {
+    label: "Locate Our Store",
+    href: "#",
+    children: [],
+  },
 ];
 
 export const heroSectionData = [

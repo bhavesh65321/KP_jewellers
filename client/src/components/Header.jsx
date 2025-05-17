@@ -4,6 +4,7 @@ import {
   FaWhatsapp,
   FaPhone,
   FaEnvelope,
+  FaChevronDown,
 } from "react-icons/fa";
 import IconButton from "./IconButton";
 import { navItems } from "../constants/data";
@@ -45,15 +46,33 @@ const Header = () => {
       </div>
 
       {/* Bottom Navigation */}
-      <nav className="bg-amber-50 text-yellow-900 px-4 py-3 flex flex-wrap justify-center gap-8 shadow-sm">
+      <nav className="bg-amber-50 text-yellow-900 px-4 py-3 flex flex-wrap justify-center gap-8 shadow-sm relative">
         {navItems.map((item, idx) => (
-          <a
-            key={idx}
-            href={item.href}
-            className="hover:underline hover:font-bold hover:italic hover:text-yellow-700 transition duration-300"
-          >
-            {item.label}
-          </a>
+          <div key={idx} className="relative group">
+            <a
+              href={item.href}
+              className="hover:underline hover:italic hover:text-yellow-700 transition duration-300 flex items-center gap-1"
+            >
+              {item.label}
+              {item.children && item.children.length > 0 && (
+                <FaChevronDown className="text-xs mt-1" />
+              )}
+            </a>
+
+            {item.children && item.children.length > 0 && (
+              <div className="absolute left-0 mt-2 bg-white border rounded-md shadow-lg z-20 min-w-[180px] opacity-0 group-hover:opacity-100 invisible group-hover:visible transition duration-300">
+                {item.children.map((child, cIdx) => (
+                  <a
+                    key={cIdx}
+                    href={child.href}
+                    className="block px-4 py-2 text-sm hover:rounded-md hover:bg-yellow-100 text-yellow-800"
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
         ))}
       </nav>
     </header>
