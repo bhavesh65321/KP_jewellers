@@ -54,7 +54,7 @@ const WhyBuyFromUs = () => {
         <div className="text-center md:text-left">
           <SectionHeading title="Why Buy From Us" />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
             {featuresData.map((feature, idx) => (
               <div
                 key={idx}

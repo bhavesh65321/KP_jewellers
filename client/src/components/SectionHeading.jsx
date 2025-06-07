@@ -8,7 +8,7 @@ const SectionHeading = ({
   accentColor = "from-yellow-400 to-yellow-500",
 }) => {
   return (
-    <div className="text-center my-16">
+    <div className="text-center mb-9">
       <h2
         className={`text-4xl py-3 md:text-5xl font-extrabold bg-gradient-to-r ${accentColor} text-transparent bg-clip-text`}
       >

@@ -2,7 +2,7 @@ const ProductCard = ({ product }) => {
   return (
     <div
       key={product.id}
-      className="relative group bg-white p-4 shadow-md rounded-lg overflow-hidden hover:shadow-xl transition w-64 hover:cursor-pointer"
+      className="relative group bg-white p-4 shadow-md rounded-lg overflow-hidden hover:shadow-xl transition hover:cursor-pointer"
     >
       {/* Product Image */}
       <img

@@ -17,7 +17,7 @@ const Categories = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6 bg-amber-50">
+    <div className="flex flex-col gap-6 bg-slate-50 py-10">
       <SectionHeading title="Categories" />
 
       <div className="relative w-full px-4 py-6">

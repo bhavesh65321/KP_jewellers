@@ -11,7 +11,7 @@ import { navItems } from "../constants/data";
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white">
-      <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-2 gap-8 text-center md:text-left">
+      <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-2 gap-8 text-left md:text-left">
         {/* Quick Links */}
         <div>
           <h3 className="text-xl font-semibold mb-4 border-b-2 border-yellow-400 inline-block">

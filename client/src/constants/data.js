@@ -129,11 +129,6 @@ export const navItems = [
     ],
   },
   {
-    label: "10+1 Monthly Plan",
-    href: "#",
-    children: [],
-  },
-  {
     label: "Locate Our Store",
     href: "#",
     children: [],
@@ -212,6 +207,45 @@ export const bestSellerProducts = [
       "https://www.pateljewellers.com/pub/media/catalog/category/10_Aug_63_-_n2n.jpg",
     description: {
       "Base Material": "Silver",
+      Stone: "Cubic Zirconia",
+      Weight: "10 grams",
+      Finish: "Polished",
+    },
+  },
+  {
+    id: 5,
+    name: "Gold Bracelet",
+    price: "399",
+    image:
+      "https://5.imimg.com/data5/SELLER/Default/2023/7/329719120/JS/DB/AG/159007652/artificial-jewellery-1000x1000.jpg",
+    description: {
+      "Base Material": "Gold",
+      Stone: "Cubic Zirconia",
+      Weight: "10 grams",
+      Finish: "Polished",
+    },
+  },
+  {
+    id: 5,
+    name: "Gold Bracelet",
+    price: "399",
+    image:
+      "https://5.imimg.com/data5/SELLER/Default/2023/7/329719120/JS/DB/AG/159007652/artificial-jewellery-1000x1000.jpg",
+    description: {
+      "Base Material": "Gold",
+      Stone: "Cubic Zirconia",
+      Weight: "10 grams",
+      Finish: "Polished",
+    },
+  },
+  {
+    id: 5,
+    name: "Gold Bracelet",
+    price: "399",
+    image:
+      "https://5.imimg.com/data5/SELLER/Default/2023/7/329719120/JS/DB/AG/159007652/artificial-jewellery-1000x1000.jpg",
+    description: {
+      "Base Material": "Gold",
       Stone: "Cubic Zirconia",
       Weight: "10 grams",
       Finish: "Polished",
