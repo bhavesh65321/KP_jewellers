@@ -23,9 +23,6 @@ const HomePage = () => {
 
       {/* Testimonials */}
       <Testimonials />
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };

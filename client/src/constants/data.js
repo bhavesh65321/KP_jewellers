@@ -27,6 +27,48 @@ export const products = [
     image:
       "https://www.pateljewellers.com/pub/media/catalog/category/10_Aug_63_-_n2n.jpg",
   },
+  {
+    id: 5,
+    name: "Platinum Pendant",
+    price: "$1,599",
+    image:
+      "https://example.com/platinum-pendant.jpg",
+  },
+  {
+    id: 6,
+    name: "Ruby Necklace",
+    price: "$2,099",
+    image:
+      "https://example.com/ruby-necklace.jpg",
+  },
+  {
+    id: 7,
+    name: "Emerald Ring",
+    price: "$1,299",
+    image:
+      "https://example.com/emerald-ring.jpg",
+  },
+  {
+    id: 8,
+    name: "Sapphire Earrings",
+    price: "$999",
+    image:
+      "https://example.com/sapphire-earrings.jpg",
+  },
+  {
+    id: 9,
+    name: "Gold Bracelet",
+    price: "$799",
+    image:
+      "https://example.com/gold-bracelet.jpg",
+  },
+  {
+    id: 10,
+    name: "Diamond Pendant",
+    price: "$1,199",
+    image:
+      "https://example.com/diamond-pendant.jpg",
+  },
 ];
 
 export const categories = [
@@ -71,67 +113,34 @@ export const categories = [
 export const navItems = [
   {
     label: "Rings",
-    href: "#",
+    href: "/products/rings",
     children: [
-      { label: "Gold Rings", href: "#" },
-      { label: "Diamond Rings", href: "#" },
-      { label: "Silver Rings", href: "#" },
+      { label: "Gold Rings", href: "/products/rings?material=Gold" },
+      { label: "Diamond Rings", href: "/products/rings?material=Diamond" },
+      { label: "Silver Rings", href: "/products/rings?material=Silver" },
     ],
   },
   {
     label: "Earrings",
-    href: "#",
+    href: "/products/earrings",
     children: [
-      { label: "Gold Earrings", href: "#" },
-      { label: "Diamond Earrings", href: "#" },
-      { label: "Silver Earrings", href: "#" },
+      { label: "Gold Earrings", href: "/products/earrings?material=Gold" },
+      { label: "Diamond Earrings", href: "/products/earrings?material=Diamond" },
+      { label: "Silver Earrings", href: "/products/earrings?material=Silver" },
     ],
   },
   {
     label: "Pendants",
-    href: "#",
+    href: "/products/pendants",
     children: [
-      { label: "Gold Pendants", href: "#" },
-      { label: "Diamond Pendants", href: "#" },
-      { label: "Silver Pendants", href: "#" },
+      { label: "Gold Pendants", href: "/products/pendants?material=Gold" },
+      { label: "Diamond Pendants", href: "/products/pendants?material=Diamond" },
+      { label: "Silver Pendants", href: "/products/pendants?material=Silver" },
     ],
   },
   {
     label: "All Jewellery",
     href: "#",
-    children: [
-      { label: "Gold Jewellery", href: "#" },
-      { label: "Diamond Jewellery", href: "#" },
-      { label: "Silver Jewellery", href: "#" },
-    ],
-  },
-  {
-    label: "Collections",
-    href: "#",
-    children: [
-      { label: "Gold Collections", href: "#" },
-      { label: "Diamond Collections", href: "#" },
-      { label: "Silver Collections", href: "#" },
-    ],
-  },
-  {
-    label: "Gifts",
-    href: "#",
-    children: [],
-  },
-  {
-    label: "Ready to Ship",
-    href: "#",
-    children: [
-      { label: "Gold Ready to Ship", href: "#" },
-      { label: "Diamond Ready to Ship", href: "#" },
-      { label: "Silver Ready to Ship", href: "#" },
-    ],
-  },
-  {
-    label: "Locate Our Store",
-    href: "#",
-    children: [],
   },
 ];
 

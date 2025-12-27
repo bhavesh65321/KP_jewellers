@@ -39,7 +39,7 @@ const Categories = () => {
               key={idx}
               className="flex flex-col items-center group cursor-pointer transition-transform duration-300"
             >
-              <div className="w-60 h-60 rounded-full overflow-hidden border-8 border-amber-300 shadow-md">
+              <div className="w-60 h-60 rounded-full overflow-hidden shadow-md">
                 <img
                   src={cat.img}
                   alt={cat.name}
