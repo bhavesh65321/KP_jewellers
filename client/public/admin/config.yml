@@ -4,19 +4,37 @@ backend:
   branch: main
   auth_type: implicit
 
-media_folder: "products/images"
-public_folder: "/products/images"
+media_folder: products/images
+public_folder: /products/images
 
 collections:
   - name: rings
     label: Rings
-    folder: "products/rings"
+    folder: products/rings
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Product Name", name: "title", widget: "string" }
-      - { label: "Price", name: "price", widget: "number" }
-      - { label: "Material", name: "material", widget: "string" }
-      - { label: "Weight", name: "weight", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Images", name: "images", widget: "image", multiple: true }
+      - label: Product Name
+        name: title
+        widget: string
+
+      - label: Price
+        name: price
+        widget: number
+
+      - label: Material
+        name: material
+        widget: string
+
+      - label: Weight
+        name: weight
+        widget: string
+
+      - label: Description
+        name: description
+        widget: text
+
+      - label: Images
+        name: images
+        widget: image
+        multiple: true
