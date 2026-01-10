@@ -1,8 +1,6 @@
 backend:
-  name: github
-  repo: bhavesh65321/KP_jewellers
+  name: git-gateway
   branch: main
-  auth_type: implicit
 
 media_folder: client/public/products/images
 public_folder: /products/images
