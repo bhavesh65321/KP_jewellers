@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: bhavesh65321/KP_jewellers
   branch: main
 
 media_folder: client/public/products/images
@@ -12,27 +13,6 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - label: Product Name
+      - label: Title
         name: title
         widget: string
-
-      - label: Price
-        name: price
-        widget: number
-
-      - label: Material
-        name: material
-        widget: string
-
-      - label: Weight
-        name: weight
-        widget: string
-
-      - label: Description
-        name: description
-        widget: text
-
-      - label: Images
-        name: images
-        widget: image
-        multiple: true
