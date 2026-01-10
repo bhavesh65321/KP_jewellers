@@ -2,14 +2,15 @@ backend:
   name: github
   repo: bhavesh65321/KP_jewellers
   branch: main
+  auth_type: implicit
 
-media_folder: "public/products/images"
+media_folder: "products/images"
 public_folder: "/products/images"
 
 collections:
-  - name: "rings"
-    label: "Rings"
-    folder: "public/products/rings"
+  - name: rings
+    label: Rings
+    folder: "products/rings"
     create: true
     slug: "{{slug}}"
     fields:
