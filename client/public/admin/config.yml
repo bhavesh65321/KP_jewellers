@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: bhavesh65321/KP_jewellers
+  name: git-gateway
   branch: main
 
 media_folder: public/products/images
