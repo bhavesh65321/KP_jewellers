@@ -1,3 +1,2 @@
 /admin/*  /admin/:splat  200
-/auth/*   /.netlify/functions/auth  200
 /*        /index.html    200

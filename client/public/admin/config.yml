@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: bhavesh65321/KP_jewellers
+  name: git-gateway
   branch: main
 
 media_folder: public/products/images
@@ -16,3 +15,13 @@ collections:
       - label: Title
         name: title
         widget: string
+      - label: Price
+        name: price
+        widget: number
+      - label: Material
+        name: material
+        widget: string
+      - label: Images
+        name: images
+        widget: image
+        multiple: true
