@@ -1,149 +1,96 @@
-export const products = [
-  {
-    id: 1,
-    name: "Gold Necklace",
-    price: "$1,299",
-    image:
-      "https://bindhani.in/cdn/shop/files/SHJWST00488White_AMain.jpg?v=1745644763",
-  },
-  {
-    id: 2,
-    name: "Diamond Ring",
-    price: "$899",
-    image:
-      "https://www.orra.co.in/media/catalog/product/cache/8706a87b250cd4797f5bf599698c5c7a/o/n/ons23036.jpg",
-  },
-  {
-    id: 3,
-    name: "Pearl Earrings",
-    price: "$499",
-    image:
-      "https://5.imimg.com/data5/SELLER/Default/2023/7/329719120/JS/DB/AG/159007652/artificial-jewellery-1000x1000.jpg",
-  },
-  {
-    id: 4,
-    name: "Silver Bracelet",
-    price: "$299",
-    image:
-      "https://www.pateljewellers.com/pub/media/catalog/category/10_Aug_63_-_n2n.jpg",
-  },
-  {
-    id: 5,
-    name: "Platinum Pendant",
-    price: "$1,599",
-    image:
-      "https://example.com/platinum-pendant.jpg",
-  },
-  {
-    id: 6,
-    name: "Ruby Necklace",
-    price: "$2,099",
-    image:
-      "https://example.com/ruby-necklace.jpg",
-  },
-  {
-    id: 7,
-    name: "Emerald Ring",
-    price: "$1,299",
-    image:
-      "https://example.com/emerald-ring.jpg",
-  },
-  {
-    id: 8,
-    name: "Sapphire Earrings",
-    price: "$999",
-    image:
-      "https://example.com/sapphire-earrings.jpg",
-  },
-  {
-    id: 9,
-    name: "Gold Bracelet",
-    price: "$799",
-    image:
-      "https://example.com/gold-bracelet.jpg",
-  },
-  {
-    id: 10,
-    name: "Diamond Pendant",
-    price: "$1,199",
-    image:
-      "https://example.com/diamond-pendant.jpg",
-  },
-];
-
-export const categories = [
-  {
-    name: "Rings",
-    img: "https://images.pexels.com/photos/1457983/pexels-photo-1457983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
-  },
-  {
-    name: "Earrings",
-    img: "https://images.pexels.com/photos/1457984/pexels-photo-1457984.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
-  },
-  {
-    name: "Pendants",
-    img: "https://images.pexels.com/photos/1457985/pexels-photo-1457985.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
-  },
-  {
-    name: "Bangles",
-    img: "https://images.pexels.com/photos/1457983/pexels-photo-1457983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
-  },
-  {
-    name: "Bracelets",
-    img: "https://images.pexels.com/photos/1457984/pexels-photo-1457984.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
-  },
-  {
-    name: "Earrings",
-    img: "https://images.pexels.com/photos/1457985/pexels-photo-1457985.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
-  },
-  {
-    name: "Pendants",
-    img: "https://images.pexels.com/photos/1457991/pexels-photo-1457991.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
-  },
-  {
-    name: "Bangles",
-    img: "https://images.pexels.com/photos/1457983/pexels-photo-1457983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
-  },
-  {
-    name: "Bracelets",
-    img: "https://images.pexels.com/photos/1457991/pexels-photo-1457991.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
-  },
-];
-
+// Navigation items for header
 export const navItems = [
   {
-    label: "Rings",
-    href: "/products/rings",
-    children: [
-      { label: "Gold Rings", href: "/products/rings?material=Gold" },
-      { label: "Diamond Rings", href: "/products/rings?material=Diamond" },
-      { label: "Silver Rings", href: "/products/rings?material=Silver" },
-    ],
-  },
-  {
-    label: "Earrings",
-    href: "/products/earrings",
-    children: [
-      { label: "Gold Earrings", href: "/products/earrings?material=Gold" },
-      { label: "Diamond Earrings", href: "/products/earrings?material=Diamond" },
-      { label: "Silver Earrings", href: "/products/earrings?material=Silver" },
-    ],
-  },
-  {
-    label: "Pendants",
-    href: "/products/pendants",
-    children: [
-      { label: "Gold Pendants", href: "/products/pendants?material=Gold" },
-      { label: "Diamond Pendants", href: "/products/pendants?material=Diamond" },
-      { label: "Silver Pendants", href: "/products/pendants?material=Silver" },
-    ],
+    label: "Home",
+    href: "/",
   },
   {
     label: "All Jewellery",
-    href: "#",
+    href: "/shop",
+  },
+  {
+    label: "Gold",
+    href: "/shop?material=gold",
+    children: [
+      { label: "Gold Rings", href: "/shop?material=gold&category=rings" },
+      { label: "Gold Earrings", href: "/shop?material=gold&category=earrings" },
+      { label: "Gold Pendants", href: "/shop?material=gold&category=pendants" },
+      { label: "Gold Bangles", href: "/shop?material=gold&category=bangles" },
+      { label: "Gold Bracelets", href: "/shop?material=gold&category=bracelets" },
+      { label: "Gold Nose Pins", href: "/shop?material=gold&category=nose-pins" },
+    ],
+  },
+  {
+    label: "Silver",
+    href: "/shop?material=silver",
+    children: [
+      { label: "Silver Rings", href: "/shop?material=silver&category=rings" },
+      { label: "Silver Earrings", href: "/shop?material=silver&category=earrings" },
+      { label: "Silver Bracelets", href: "/shop?material=silver&category=bracelets" },
+    ],
+  },
+  {
+    label: "Coins",
+    href: "/shop?category=coins",
+    children: [
+      { label: "Gold Coins", href: "/shop?material=gold&category=coins" },
+      { label: "Silver Coins", href: "/shop?material=silver&category=coins" },
+    ],
+  },
+  {
+    label: "Platinum",
+    href: "/shop?material=platinum",
+    children: [
+      { label: "Platinum Rings", href: "/shop?material=platinum&category=rings" },
+      { label: "Platinum Pendants", href: "/shop?material=platinum&category=pendants" },
+    ],
+  },
+  {
+    label: "About Us",
+    href: "/about",
   },
 ];
 
+// Categories for display on homepage
+export const categories = [
+  {
+    name: "Rings",
+    slug: "rings",
+    img: "https://images.pexels.com/photos/1457983/pexels-photo-1457983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
+  },
+  {
+    name: "Earrings",
+    slug: "earrings",
+    img: "https://images.pexels.com/photos/1457984/pexels-photo-1457984.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
+  },
+  {
+    name: "Pendants",
+    slug: "pendants",
+    img: "https://images.pexels.com/photos/1457985/pexels-photo-1457985.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
+  },
+  {
+    name: "Bangles",
+    slug: "bangles",
+    img: "https://images.pexels.com/photos/1457983/pexels-photo-1457983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
+  },
+  {
+    name: "Bracelets",
+    slug: "bracelets",
+    img: "https://images.pexels.com/photos/1457984/pexels-photo-1457984.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
+  },
+  {
+    name: "Nose Pins",
+    slug: "nose-pins",
+    img: "https://images.pexels.com/photos/1457985/pexels-photo-1457985.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
+  },
+  {
+    name: "Coins",
+    slug: "coins",
+    img: "https://images.pexels.com/photos/1457991/pexels-photo-1457991.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200",
+  },
+];
+
+// Hero section slider data
 export const heroSectionData = [
   {
     image:
@@ -164,113 +111,52 @@ export const heroSectionData = [
       "https://www.orra.co.in/media/catalog/product/cache/8706a87b250cd4797f5bf599698c5c7a/o/n/ons23036.jpg",
     title: "Luxury Redefined",
     subtitle: "New Arrivals",
-    description: "Shop Now Before It’s Gone",
+    description: "Shop Now Before It's Gone",
   },
 ];
 
-export const bestSellerProducts = [
-  {
-    id: 1,
-    name: "Gold Necklace",
-    price: "1,299",
-    image:
-      "https://bindhani.in/cdn/shop/files/SHJWST00488White_AMain.jpg?v=1745644763",
-    description: {
-      "Base Material": "Gold",
-      Stone: "Cubic Zirconia",
-      Weight: "10 grams",
-      Finish: "Polished",
+// About Us page data - Update this with actual information
+export const aboutUsData = {
+  shopName: "KP Jewellers",
+  tagline: "Trusted Jewellers Since Generations",
+  established: "1985",
+  ownerName: "Mr. Krishna Patel",
+  ownerTitle: "Founder & Master Craftsman",
+  ownerImage: "https://via.placeholder.com/300x300?text=Owner+Photo",
+  ownerMessage: `Welcome to KP Jewellers! For over three decades, we have been crafting exquisite jewellery pieces that celebrate life's precious moments. Our commitment to quality, authenticity, and customer satisfaction has made us a trusted name in the jewellery industry.
+
+Every piece at KP Jewellers is crafted with love, precision, and the finest materials. We believe that jewellery is not just an accessory – it's an emotion, a memory, and a legacy that passes through generations.`,
+  
+  features: [
+    {
+      title: "100% Certified",
+      description: "All our jewellery comes with BIS Hallmark certification ensuring purity and authenticity.",
     },
-  },
-  {
-    id: 2,
-    name: "Diamond Ring",
-    price: "899",
-    image:
-      "https://www.orra.co.in/media/catalog/product/cache/8706a87b250cd4797f5bf599698c5c7a/o/n/ons23036.jpg",
-    description: {
-      "Base Material": "Gold",
-      Stone: "Cubic Zirconia",
-      Weight: "10 grams",
-      Finish: "Polished",
+    {
+      title: "Lifetime Exchange",
+      description: "We offer lifetime exchange on all gold and diamond jewellery at current market rates.",
     },
-  },
-  {
-    id: 3,
-    name: "Pearl Earrings",
-    price: "499",
-    image:
-      "https://5.imimg.com/data5/SELLER/Default/2023/7/329719120/JS/DB/AG/159007652/artificial-jewellery-1000x1000.jpg",
-    description: {
-      "Base Material": "Gold",
-      Stone: "Cubic Zirconia",
-      Weight: "10 grams",
-      Finish: "Polished",
+    {
+      title: "Custom Designs",
+      description: "Get your dream jewellery custom-made by our expert craftsmen.",
     },
-  },
-  {
-    id: 4,
-    name: "Silver Bracelet",
-    price: "299",
-    image:
-      "https://www.pateljewellers.com/pub/media/catalog/category/10_Aug_63_-_n2n.jpg",
-    description: {
-      "Base Material": "Silver",
-      Stone: "Cubic Zirconia",
-      Weight: "10 grams",
-      Finish: "Polished",
+    {
+      title: "Transparent Pricing",
+      description: "No hidden charges. Clear breakdown of gold rate, making charges, and taxes.",
     },
+  ],
+
+  contact: {
+    address: "123, Main Market, City Name, State - 123456",
+    phone: "+91 XXXXX XXXXX",
+    whatsapp: "+91 XXXXX XXXXX",
+    email: "info@kpjewellers.com",
+    timing: "10:00 AM - 9:00 PM (All Days)",
   },
-  {
-    id: 5,
-    name: "Gold Bracelet",
-    price: "399",
-    image:
-      "https://5.imimg.com/data5/SELLER/Default/2023/7/329719120/JS/DB/AG/159007652/artificial-jewellery-1000x1000.jpg",
-    description: {
-      "Base Material": "Gold",
-      Stone: "Cubic Zirconia",
-      Weight: "10 grams",
-      Finish: "Polished",
-    },
+
+  socialLinks: {
+    facebook: "https://facebook.com/kpjewellers",
+    instagram: "https://instagram.com/kpjewellers",
+    twitter: "https://twitter.com/kpjewellers",
   },
-  {
-    id: 5,
-    name: "Gold Bracelet",
-    price: "399",
-    image:
-      "https://5.imimg.com/data5/SELLER/Default/2023/7/329719120/JS/DB/AG/159007652/artificial-jewellery-1000x1000.jpg",
-    description: {
-      "Base Material": "Gold",
-      Stone: "Cubic Zirconia",
-      Weight: "10 grams",
-      Finish: "Polished",
-    },
-  },
-  {
-    id: 5,
-    name: "Gold Bracelet",
-    price: "399",
-    image:
-      "https://5.imimg.com/data5/SELLER/Default/2023/7/329719120/JS/DB/AG/159007652/artificial-jewellery-1000x1000.jpg",
-    description: {
-      "Base Material": "Gold",
-      Stone: "Cubic Zirconia",
-      Weight: "10 grams",
-      Finish: "Polished",
-    },
-  },
-  {
-    id: 5,
-    name: "Gold Bracelet",
-    price: "399",
-    image:
-      "https://5.imimg.com/data5/SELLER/Default/2023/7/329719120/JS/DB/AG/159007652/artificial-jewellery-1000x1000.jpg",
-    description: {
-      "Base Material": "Gold",
-      Stone: "Cubic Zirconia",
-      Weight: "10 grams",
-      Finish: "Polished",
-    },
-  },
-];
+};
