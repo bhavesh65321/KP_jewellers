@@ -7,6 +7,7 @@ import {
   FaBars,
   FaTimes,
   FaMicrophone,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
 import { Drawer } from "@mui/material";
 import { navItems } from "../constants/data";
@@ -119,16 +120,16 @@ const Header = () => {
   return (
     <>
       <header className="sticky top-0 z-50">
-        {/* Top Announcement Bar */}
-        <div className="bg-gray-900 text-white text-center py-2 text-sm">
+        {/* Top Announcement Bar - Hidden on mobile */}
+        <div className="hidden md:block bg-gray-900 text-white text-center py-2 text-sm">
           <span className="text-amber-400">✨</span> Free Shipping on Orders Above ₹50,000 | 
           <span className="text-amber-400 ml-1">Lifetime Exchange Available</span>
         </div>
 
         {/* Main Header */}
         <div className="bg-white shadow-sm">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="flex items-center justify-between py-4">
+          <div className="max-w-7xl mx-auto px-2 lg:px-4">
+            <div className="flex items-center justify-between py-3">
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsDrawerOpen(true)}
@@ -137,20 +138,17 @@ const Header = () => {
                 <FaBars size={22} />
               </button>
 
-              {/* Logo */}
-              <Link to="/" className="flex-shrink-0">
-                <div className="text-center lg:text-left">
-                  <h1 className="text-2xl md:text-3xl font-serif font-bold tracking-wider text-gray-800">
-                    KP <span className="text-amber-600">JEWELLERS</span>
-                  </h1>
-                  <p className="text-[10px] md:text-xs text-gray-500 tracking-[0.2em] uppercase">
-                    Since 1985 • Trusted Quality
-                  </p>
-                </div>
+              {/* Logo - Aligned Left */}
+              <Link to="/" className="flex-shrink-0 -ml-2 lg:-ml-4">
+                <img 
+                  src="/images/products/logo.jpeg" 
+                  alt="KP Jewellers" 
+                  className="h-16 md:h-20 lg:h-24 w-auto object-contain"
+                />
               </Link>
 
               {/* Desktop Search Bar with Voice */}
-              <form onSubmit={handleSearch} className="hidden lg:flex items-center flex-1 max-w-lg ml-auto mr-4">
+              <form onSubmit={handleSearch} className="hidden lg:flex items-center flex-1 max-w-lg ml-auto mr-3">
                 <div className="relative flex-1 flex items-center">
                   <input
                     type="text"
@@ -214,7 +212,7 @@ const Header = () => {
               </form>
 
               {/* Right Icons */}
-              <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
+              <div className="flex items-center gap-3 md:gap-4 flex-shrink-0 -mr-2 lg:-mr-4">
                 {/* Mobile Search Toggle */}
                 <button
                   onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
@@ -225,20 +223,20 @@ const Header = () => {
 
                 {/* Call Icon */}
                 <a
-                  href="tel:+91XXXXXXXXXX"
+                  href="tel:+917976043673"
                   className="hidden md:flex p-2 bg-amber-50 rounded-full text-amber-600 hover:bg-amber-100 transition-colors"
-                  title="Call Us"
+                  title="Call Us: +91 7976043673"
                 >
                   <FaPhone size={16} />
                 </a>
 
                 {/* WhatsApp Icon */}
                 <a
-                  href="https://wa.me/"
+                  href="https://wa.me/918426808544"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 bg-green-50 rounded-full text-green-600 hover:bg-green-100 transition-colors"
-                  title="WhatsApp"
+                  title="WhatsApp: +91 8426808544"
                 >
                   <FaWhatsapp size={18} />
                 </a>
@@ -452,26 +450,51 @@ const Header = () => {
             </div>
 
             {/* Drawer Footer */}
-            <div className="p-5 bg-gray-50 border-t">
-              <div className="flex items-center gap-4 mb-4">
+            <div className="p-4 bg-gray-50 border-t space-y-3">
+              {/* Store Location Button */}
+              <a
+                href="https://www.google.com/maps/place/K+P+jewellers/@24.7525243,71.7754785,17z"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 w-full p-3 bg-white border border-gray-200 rounded-xl hover:border-amber-400 hover:shadow-md transition-all"
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <FaMapMarkerAlt className="text-white" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-semibold text-gray-800">Visit Our Store</p>
+                  <p className="text-xs text-gray-500">Sanchore, Rajasthan</p>
+                </div>
+                <FaChevronDown className="text-gray-400 -rotate-90 text-xs" />
+              </a>
+
+              {/* Call & WhatsApp Buttons */}
+              <div className="flex items-center gap-3">
                 <a
-                  href="tel:+91XXXXXXXXXX"
-                  className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-amber-500 text-white rounded-full text-sm font-medium hover:bg-amber-600 transition-colors"
+                  href="tel:+917976043673"
+                  className="flex-1 flex items-center justify-center gap-2 py-3 bg-amber-500 text-white rounded-xl text-sm font-semibold hover:bg-amber-600 transition-colors shadow-md shadow-amber-200"
                 >
-                  <FaPhone size={14} /> Call Us
+                  <FaPhone size={14} /> Call Now
                 </a>
                 <a
-                  href="https://wa.me/"
+                  href="https://wa.me/918426808544"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-green-500 text-white rounded-full text-sm font-medium hover:bg-green-600 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-2 py-3 bg-[#25D366] text-white rounded-xl text-sm font-semibold hover:bg-green-600 transition-colors shadow-md shadow-green-200"
                 >
                   <FaWhatsapp size={16} /> WhatsApp
                 </a>
               </div>
-              <p className="text-center text-xs text-gray-500">
-                Trusted Jewellers Since 1985
-              </p>
+
+              {/* Trust Badge */}
+              <div className="flex items-center justify-center gap-2 pt-2">
+                <div className="w-1.5 h-1.5 bg-amber-400 rounded-full"></div>
+                <p className="text-xs text-gray-500 font-medium">
+                  Trusted Jewellers Since 1985
+                </p>
+                <div className="w-1.5 h-1.5 bg-amber-400 rounded-full"></div>
+              </div>
             </div>
           </div>
         </Drawer>

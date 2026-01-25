@@ -120,10 +120,20 @@ export const aboutUsData = {
   shopName: "KP Jewellers",
   tagline: "Trusted Jewellers Since Generations",
   established: "1985",
-  ownerName: "Mr. Krishna Patel",
-  ownerTitle: "Founder & Master Craftsman",
-  ownerImage: "https://via.placeholder.com/300x300?text=Owner+Photo",
-  ownerMessage: `Welcome to KP Jewellers! For over three decades, we have been crafting exquisite jewellery pieces that celebrate life's precious moments. Our commitment to quality, authenticity, and customer satisfaction has made us a trusted name in the jewellery industry.
+  // Two founders
+  founders: [
+    {
+      name: "Hitesh Purohit",
+      title: "Co-Founder",
+      image: "/images/founders/hitesh.jpg", // Add your image here
+    },
+    {
+      name: "Bharat Purohit",
+      title: "Co-Founder",
+      image: "/images/founders/bharat.jpg", // Add your image here
+    },
+  ],
+  founderMessage: `Welcome to KP Jewellers! For over three decades, we have been crafting exquisite jewellery pieces that celebrate life's precious moments. Our commitment to quality, authenticity, and customer satisfaction has made us a trusted name in the jewellery industry.
 
 Every piece at KP Jewellers is crafted with love, precision, and the finest materials. We believe that jewellery is not just an accessory – it's an emotion, a memory, and a legacy that passes through generations.`,
   
@@ -147,16 +157,16 @@ Every piece at KP Jewellers is crafted with love, precision, and the finest mate
   ],
 
   contact: {
-    address: "123, Main Market, City Name, State - 123456",
-    phone: "+91 XXXXX XXXXX",
-    whatsapp: "+91 XXXXX XXXXX",
-    email: "info@kpjewellers.com",
+    address: "Sanchore, Rajasthan, India",
+    mapLink: "https://www.google.com/maps/place/K+P+jewellers/@24.7525243,71.7754785,17z/data=!3m1!4b1!4m6!3m5!1s0x3944a525ea6a553b:0x64b7e8b9f45b420f!8m2!3d24.7525243!4d71.7754785!16s%2Fg%2F11y3ywskdf",
+    phone: "+91 79760 43673",
+    whatsapp: "+91 84268 08544",
+    email: "K.P.JEWELLERS1008@GMAIL.COM",
     timing: "10:00 AM - 9:00 PM (All Days)",
   },
 
   socialLinks: {
-    facebook: "https://facebook.com/kpjewellers",
-    instagram: "https://instagram.com/kpjewellers",
-    twitter: "https://twitter.com/kpjewellers",
+    facebook: "https://www.facebook.com/share/1ApZkEZCNn/",
+    instagram: "https://www.instagram.com/k_p_jewellers_sanchore",
   },
 };

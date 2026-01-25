@@ -4,6 +4,7 @@ import Categories from "../components/Categories";
 import Testimonials from "../components/Testimonials";
 import BestSellerProducts from "../components/BestSellerProducts";
 import WhyBuyFromUs from "../components/WhyBuyFromUs";
+import FeaturedVideo from "../components/FeaturedVideo";
 
 const HomePage = () => {
   return (
@@ -19,6 +20,9 @@ const HomePage = () => {
 
       {/* Why Buy From Us */}
       <WhyBuyFromUs />
+
+      {/* Featured Video */}
+      <FeaturedVideo />
 
       {/* Testimonials */}
       <Testimonials />

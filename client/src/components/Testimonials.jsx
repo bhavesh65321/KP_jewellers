@@ -1,51 +1,50 @@
 import React, { useState } from "react";
-import { FaStar, FaQuoteLeft, FaChevronLeft, FaChevronRight, FaGoogle } from "react-icons/fa";
+import { FaStar, FaQuoteLeft, FaChevronLeft, FaChevronRight, FaGoogle, FaExternalLinkAlt } from "react-icons/fa";
 
+// Google Maps URL for reviews
+const GOOGLE_MAPS_URL = "https://www.google.com/maps/place/K+P+jewellers/@24.7525243,71.7754785,17z/data=!3m1!4b1!4m6!3m5!1s0x3944a525ea6a553b:0x64b7e8b9f45b420f!8m2!3d24.7525243!4d71.7754785!16s%2Fg%2F11y3ywskdf";
+
+// Customer testimonials
 const testimonials = [
   {
     id: 1,
     name: "Priya Sharma",
-    location: "Mumbai",
-    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+    location: "Sanchore",
+    avatar: "https://ui-avatars.com/api/?name=Priya+Sharma&background=f59e0b&color=fff",
     rating: 5,
-    text: "Absolutely stunning collection! I bought my wedding jewellery from KP Jewellers and received countless compliments. The quality is exceptional and the staff was so helpful in customizing pieces to match my outfit.",
-    occasion: "Wedding Collection",
+    text: "Absolutely stunning collection! The quality is exceptional and the staff was so helpful!",
   },
   {
     id: 2,
     name: "Rahul Mehta",
-    location: "Delhi",
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+    location: "Sanchore",
+    avatar: "https://ui-avatars.com/api/?name=Rahul+Mehta&background=3b82f6&color=fff",
     rating: 5,
-    text: "Purchased gold coins as an investment and I'm thoroughly impressed with the purity and pricing. The lifetime exchange policy gives me complete peace of mind. Highly recommended!",
-    occasion: "Gold Coins",
+    text: "Impressed with the purity and pricing. The lifetime exchange policy gives complete peace of mind!",
   },
   {
     id: 3,
     name: "Anita Patel",
-    location: "Ahmedabad",
-    avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+    location: "Barmer",
+    avatar: "https://ui-avatars.com/api/?name=Anita+Patel&background=10b981&color=fff",
     rating: 5,
-    text: "The diamond pendant I bought for my anniversary is breathtaking! The craftsmanship is impeccable and my wife absolutely loves it. KP Jewellers has earned a customer for life.",
-    occasion: "Diamond Pendant",
+    text: "The diamond pendant is breathtaking! KP Jewellers has earned a customer for life.",
   },
   {
     id: 4,
     name: "Vikram Singh",
-    location: "Jaipur",
-    avatar: "https://randomuser.me/api/portraits/men/75.jpg",
+    location: "Jalore",
+    avatar: "https://ui-avatars.com/api/?name=Vikram+Singh&background=8b5cf6&color=fff",
     rating: 5,
-    text: "Best jewellery shopping experience ever! The transparent pricing and BIS hallmark certification on every piece gives you complete confidence. Their designs are unique and elegant.",
-    occasion: "Gold Bangles",
+    text: "Best jewellery shopping experience! Transparent pricing and BIS hallmark on every piece.",
   },
   {
     id: 5,
     name: "Meera Krishnan",
-    location: "Chennai",
-    avatar: "https://randomuser.me/api/portraits/women/89.jpg",
+    location: "Sanchore",
+    avatar: "https://ui-avatars.com/api/?name=Meera+Krishnan&background=ec4899&color=fff",
     rating: 5,
-    text: "I've been buying from KP Jewellers for over 10 years. Their traditional designs combined with modern aesthetics make them stand out. The exchange policy is simply the best in the market.",
-    occasion: "Traditional Sets",
+    text: "Buying from KP Jewellers for 10 years. Their designs are outstanding!",
   },
 ];
 
@@ -57,118 +56,104 @@ const Testimonials = () => {
     if (isAnimating) return;
     setIsAnimating(true);
     setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
-    setTimeout(() => setIsAnimating(false), 500);
+    setTimeout(() => setIsAnimating(false), 400);
   };
 
   const handleNext = () => {
     if (isAnimating) return;
     setIsAnimating(true);
     setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
-    setTimeout(() => setIsAnimating(false), 500);
+    setTimeout(() => setIsAnimating(false), 400);
   };
 
   const activeTestimonial = testimonials[activeIndex];
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-amber-50 to-white relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-10 left-10 w-20 h-20 border border-amber-300 rounded-full"></div>
-        <div className="absolute top-1/3 right-20 w-32 h-32 border border-amber-200 rounded-full"></div>
-        <div className="absolute bottom-20 left-1/4 w-16 h-16 bg-amber-100 rounded-full"></div>
-      </div>
-
-      <div className="max-w-6xl mx-auto px-4 relative z-10">
+    <section className="py-10 md:py-14 bg-amber-50/50">
+      <div className="max-w-4xl mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <span className="inline-block px-4 py-1.5 bg-amber-100 text-amber-700 text-sm font-medium rounded-full mb-4">
-            Customer Love
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-4">
+        <div className="text-center mb-6 md:mb-8">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-gray-900">
             What Our <span className="text-amber-600">Customers</span> Say
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Join thousands of happy customers who have made us their trusted jewellery destination
-          </p>
         </div>
 
-        {/* Main Testimonial Card */}
-        <div className="relative max-w-4xl mx-auto">
+        {/* Testimonial Card */}
+        <div className="relative">
           {/* Navigation Arrows */}
           <button
             onClick={handlePrev}
-            className="absolute left-0 md:-left-16 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-amber-500 hover:text-white transition-all duration-300"
+            className="absolute left-0 md:-left-12 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-amber-500 hover:text-white transition-all"
           >
-            <FaChevronLeft size={16} />
+            <FaChevronLeft size={14} />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-0 md:-right-16 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-amber-500 hover:text-white transition-all duration-300"
+            className="absolute right-0 md:-right-12 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-amber-500 hover:text-white transition-all"
           >
-            <FaChevronRight size={16} />
+            <FaChevronRight size={14} />
           </button>
 
           {/* Card */}
-          <div className="bg-white rounded-3xl shadow-xl p-6 md:p-10 lg:p-12 mx-8 md:mx-0 border border-gray-100">
-            <div className={`transition-all duration-500 ${isAnimating ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
-              {/* Quote Icon */}
-              <div className="flex justify-center mb-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg shadow-amber-200">
-                  <FaQuoteLeft className="text-white text-xl" />
+          <div className="bg-white rounded-2xl shadow-lg p-5 md:p-8 mx-6 md:mx-0 border border-gray-100">
+            <div className={`transition-all duration-400 ${isAnimating ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
+              {/* Quote & Text */}
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <FaQuoteLeft className="text-white text-sm" />
                 </div>
+                <p className="text-gray-700 text-base md:text-lg leading-relaxed italic flex-1">
+                  "{activeTestimonial.text}"
+                </p>
               </div>
 
-              {/* Testimonial Text */}
-              <p className="text-center text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed mb-8 font-light italic">
-                "{activeTestimonial.text}"
-              </p>
-
-              {/* Rating Stars */}
-              <div className="flex justify-center gap-1 mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <FaStar
-                    key={i}
-                    className={`text-lg ${i < activeTestimonial.rating ? "text-amber-400" : "text-gray-200"}`}
-                  />
-                ))}
-              </div>
-
-              {/* Customer Info */}
-              <div className="flex flex-col items-center">
-                <div className="relative mb-3">
-                  <img
-                    src={activeTestimonial.avatar}
-                    alt={activeTestimonial.name}
-                    className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-4 border-amber-100"
-                  />
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center border-2 border-white">
-                    <FaGoogle className="text-white text-xs" />
+              {/* Customer Info Row */}
+              <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                <div className="flex items-center gap-3">
+                  <div className="relative">
+                    <img
+                      src={activeTestimonial.avatar}
+                      alt={activeTestimonial.name}
+                      className="w-12 h-12 rounded-full object-cover border-2 border-amber-100"
+                    />
+                    <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center border-2 border-white">
+                      <FaGoogle className="text-white text-[8px]" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 text-sm">
+                      {activeTestimonial.name}
+                    </h4>
+                    <p className="text-gray-500 text-xs">{activeTestimonial.location}</p>
                   </div>
                 </div>
-                <h4 className="text-lg md:text-xl font-semibold text-gray-900">
-                  {activeTestimonial.name}
-                </h4>
-                <p className="text-gray-500 text-sm">{activeTestimonial.location}</p>
-                <span className="mt-2 px-3 py-1 bg-amber-50 text-amber-700 text-xs font-medium rounded-full">
-                  {activeTestimonial.occasion}
-                </span>
+                
+                {/* Rating Stars */}
+                <div className="flex gap-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <FaStar
+                      key={i}
+                      className={`text-sm ${i < activeTestimonial.rating ? "text-amber-400" : "text-gray-200"}`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-8">
+          <div className="flex justify-center gap-1.5 mt-4">
             {testimonials.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => {
                   setIsAnimating(true);
                   setActiveIndex(idx);
-                  setTimeout(() => setIsAnimating(false), 500);
+                  setTimeout(() => setIsAnimating(false), 400);
                 }}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
                   idx === activeIndex
-                    ? "bg-amber-500 w-8"
+                    ? "bg-amber-500 w-6"
                     : "bg-gray-300 hover:bg-gray-400"
                 }`}
               />
@@ -176,53 +161,29 @@ const Testimonials = () => {
           </div>
         </div>
 
-        {/* Mini Testimonials Grid */}
-        <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-          {testimonials.slice(0, 3).map((t, idx) => (
-            <div
-              key={t.id}
-              className={`bg-white rounded-xl p-5 border transition-all duration-300 cursor-pointer ${
-                idx === activeIndex
-                  ? "border-amber-400 shadow-lg shadow-amber-100"
-                  : "border-gray-100 hover:border-amber-200 hover:shadow-md"
-              }`}
-              onClick={() => {
-                setIsAnimating(true);
-                setActiveIndex(idx);
-                setTimeout(() => setIsAnimating(false), 500);
-              }}
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <img
-                  src={t.avatar}
-                  alt={t.name}
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-                <div>
-                  <h5 className="font-semibold text-gray-900 text-sm">{t.name}</h5>
-                  <div className="flex gap-0.5">
-                    {[...Array(5)].map((_, i) => (
-                      <FaStar key={i} className="text-amber-400 text-xs" />
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <p className="text-gray-600 text-sm line-clamp-2">"{t.text}"</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Google Reviews Badge */}
-        <div className="mt-10 flex justify-center">
-          <div className="inline-flex items-center gap-3 px-6 py-3 bg-white rounded-full shadow-md border border-gray-100">
-            <FaGoogle className="text-xl text-blue-500" />
-            <div className="flex items-center gap-1">
+        {/* Google Review Link */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <div className="flex items-center gap-2">
+            <FaGoogle className="text-lg text-blue-500" />
+            <span className="text-xl font-bold text-gray-900">5.0</span>
+            <div className="flex gap-0.5">
               {[...Array(5)].map((_, i) => (
                 <FaStar key={i} className="text-amber-400 text-sm" />
               ))}
             </div>
-            <span className="text-gray-600 text-sm font-medium">4.9/5 on Google Reviews</span>
           </div>
+          
+          <a
+            href={GOOGLE_MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-gray-200 hover:shadow-md hover:border-blue-300 transition-all text-sm"
+          >
+            <span className="text-gray-700 font-medium hover:text-blue-600">
+              Write a Review
+            </span>
+            <FaExternalLinkAlt className="text-xs text-gray-400" />
+          </a>
         </div>
       </div>
     </section>

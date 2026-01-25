@@ -1,7 +1,7 @@
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
-import { heroSectionData, categories } from "../constants/data";
+import { heroSectionData } from "../constants/data";
+import { loadHeroImages } from "../utils/csvLoader";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../App.css";
@@ -36,6 +36,33 @@ const ArrowRight = (props) => (
 );
 
 const HeroSection = () => {
+  const [slides, setSlides] = useState(heroSectionData);
+  const [loading, setLoading] = useState(true);
+
+  // Load hero images from Google Sheets
+  useEffect(() => {
+    async function fetchHeroImages() {
+      try {
+        const googleImages = await loadHeroImages();
+        
+        if (googleImages && googleImages.length > 0) {
+          // Use Google Sheets images
+          setSlides(googleImages);
+        } else {
+          // Fall back to default images
+          setSlides(heroSectionData);
+        }
+      } catch (error) {
+        console.error("Error loading hero images:", error);
+        setSlides(heroSectionData);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchHeroImages();
+  }, []);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -49,79 +76,42 @@ const HeroSection = () => {
     nextArrow: <ArrowRight />,
   };
 
-  const collectionSettings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    arrows: true,
-    prevArrow: <ArrowLeft />,
-    nextArrow: <ArrowRight />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  };
-
   return (
     <section className="w-full">
       {/* Hero Slider */}
       <div className="w-full mb-12 relative">
-        <Slider {...settings}>
-          {heroSectionData.map((slide) => (
-            <div key={slide.id} className="relative">
-              <img
-                src={slide.image}
-                alt={slide.title}
-                className="w-full h-[700px] object-cover"
-              />
-              <div className="absolute bottom-6 right-8 text-white p-4 rounded-lg max-w-sm text-right">
-                <h2 className="text-2xl font-bold">{slide.title}</h2>
-                <p className="text-sm mt-1">{slide.subtitle}</p>
-              </div>
-            </div>
-          ))}
-        </Slider>
-      </div>
-
-      {/* Discover Our Collections */}
-      <div className="px-6 relative">
-        <h2 className="text-center text-3xl font-serif font-bold mb-6 text-gray-800">
-          Discover Our Collections
-        </h2>
-        <Slider {...collectionSettings}>
-          {categories.map((category, index) => (
-            <div key={index} className="text-center flex gap-6 overflow-x-auto">
-              <div className="w-42 h-42 rounded-full overflow-hidden shadow-md mx-auto">
+        {loading ? (
+          // Loading skeleton
+          <div className="w-full h-[500px] md:h-[600px] lg:h-[700px] bg-gray-200 animate-pulse flex items-center justify-center">
+            <div className="text-gray-400">Loading...</div>
+          </div>
+        ) : (
+          <Slider {...settings}>
+            {slides.map((slide, index) => (
+              <div key={slide.id || index} className="relative">
                 <img
-                  src={category.img}
-                  alt={category.name}
-                  className="w-full h-full object-cover"
+                  src={slide.image}
+                  alt={slide.title || `KP Jewellers Banner ${index + 1}`}
+                  referrerPolicy="no-referrer"
+                  className="w-full h-[500px] md:h-[600px] lg:h-[700px] object-cover"
+                  onError={(e) => {
+                    // Fallback to default image on error
+                    e.target.onerror = null;
+                    if (heroSectionData[index]) {
+                      e.target.src = heroSectionData[index].image;
+                    }
+                  }}
                 />
+                {(slide.title || slide.subtitle) && (
+                  <div className="absolute bottom-6 right-8 text-white p-4 rounded-lg max-w-sm text-right bg-black/30 backdrop-blur-sm">
+                    {slide.title && <h2 className="text-2xl font-bold">{slide.title}</h2>}
+                    {slide.subtitle && <p className="text-sm mt-1">{slide.subtitle}</p>}
+                  </div>
+                )}
               </div>
-              <p className="mt-3 text-lg font-medium text-gray-800">
-                {category.name}
-              </p>
-            </div>
-          ))}
-        </Slider>
+            ))}
+          </Slider>
+        )}
       </div>
     </section>
   );

@@ -214,7 +214,7 @@ const ProductPage = () => {
 
             {/* WhatsApp Buy Button */}
             <a
-              href={`https://wa.me/?text=${whatsappMessage}`}
+              href={`https://wa.me/918426808544?text=${whatsappMessage}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-3 px-8 py-4 bg-green-500 text-white rounded-xl text-lg font-semibold hover:bg-green-600 transition-all shadow-lg hover:shadow-xl"

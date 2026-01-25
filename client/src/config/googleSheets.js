@@ -19,6 +19,9 @@
  * 
  * Tab 2: Rates (gid=RATES_GID)
  * Columns: material, purity, rate
+ * 
+ * Tab 3: Hero Images (gid=HERO_GID) - OPTIONAL
+ * Columns: image, title, subtitle
  */
 
 export const GOOGLE_SHEETS_CONFIG = {
@@ -33,6 +36,11 @@ export const GOOGLE_SHEETS_CONFIG = {
   
   // Rates tab published URL (change gid to your rates tab)
   ratesUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSZvpPm_9VLS7SdjBcqvRZuK102UGLheks-BUN18SrUQwHrytZfzcoyL3R0QE72PU6az_aP-41zgK_C/pub?gid=616740870&single=true&output=csv",
+  
+  // Hero Images tab published URL (OPTIONAL - leave empty to use default images)
+  // Create a new tab in your sheet with columns: image, title, subtitle
+  // Then publish that specific tab and paste the URL here
+  heroImagesUrl: "",
   
   // Cache duration in milliseconds (5 minutes = 300000)
   // Set to 0 to always fetch fresh data
@@ -51,6 +59,23 @@ export function getProductsCSVUrl() {
  */
 export function getRatesCSVUrl() {
   return GOOGLE_SHEETS_CONFIG.ratesUrl;
+}
+
+/**
+ * Get the published CSV URL for hero images
+ */
+export function getHeroImagesCSVUrl() {
+  return GOOGLE_SHEETS_CONFIG.heroImagesUrl;
+}
+
+/**
+ * Check if hero images are configured
+ */
+export function isHeroImagesConfigured() {
+  return (
+    GOOGLE_SHEETS_CONFIG.heroImagesUrl &&
+    GOOGLE_SHEETS_CONFIG.heroImagesUrl.includes("docs.google.com")
+  );
 }
 
 /**

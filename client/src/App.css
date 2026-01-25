@@ -1,11 +1,37 @@
 /* carousel.css */
+.slick-dots {
+  bottom: -30px;
+}
+
+.slick-dots li {
+  margin: 0 2px;
+}
+
 .slick-dots li button:before {
-  font-size: 18px; 
+  font-size: 10px;
+  color: #d1d5db;
+  opacity: 1;
 }
 
 .slick-dots li.slick-active button:before {
-  font-size: 18px;
-  color: #facc15; 
+  font-size: 12px;
+  color: #f59e0b;
+  opacity: 1;
+}
+
+/* Better dots for mobile */
+@media (max-width: 640px) {
+  .slick-dots {
+    bottom: -25px;
+  }
+  
+  .slick-dots li button:before {
+    font-size: 8px;
+  }
+  
+  .slick-dots li.slick-active button:before {
+    font-size: 10px;
+  }
 }
 
 .scrollbar-hide::-webkit-scrollbar {

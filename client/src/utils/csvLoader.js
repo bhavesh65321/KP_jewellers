@@ -2,7 +2,9 @@ import {
   GOOGLE_SHEETS_CONFIG,
   getProductsCSVUrl,
   getRatesCSVUrl,
+  getHeroImagesCSVUrl,
   isGoogleSheetsConfigured,
+  isHeroImagesConfigured,
   convertDriveUrlToDirectLink,
 } from "../config/googleSheets";
 
@@ -10,6 +12,7 @@ import {
 const cache = {
   products: { data: null, timestamp: 0 },
   rates: { data: null, timestamp: 0 },
+  heroImages: { data: null, timestamp: 0 },
 };
 
 /**
@@ -111,11 +114,83 @@ export async function loadRates() {
 }
 
 /**
+ * Load hero images - from Google Sheets or return null (use defaults)
+ */
+export async function loadHeroImages() {
+  // Check cache first
+  if (isCacheValid("heroImages")) {
+    return cache.heroImages.data;
+  }
+
+  // Check if hero images are configured
+  if (!isHeroImagesConfigured()) {
+    return null; // Will use default images
+  }
+
+  try {
+    const url = getHeroImagesCSVUrl();
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      console.warn("Failed to load hero images, using defaults");
+      return null;
+    }
+
+    const text = await response.text();
+    const lines = text.trim().split("\n");
+    
+    if (lines.length < 2) return null;
+
+    const headers = lines[0].split(",").map((h) => h.trim().toLowerCase());
+    const heroImages = [];
+
+    for (let i = 1; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (!line) continue;
+
+      const values = parseCSVLine(line);
+      const entry = {};
+
+      headers.forEach((header, index) => {
+        entry[header] = values[index]?.trim() || "";
+      });
+
+      // Convert Google Drive URL to direct link
+      if (entry.image) {
+        entry.image = convertDriveUrlToDirectLink(entry.image);
+      }
+
+      // Only add if image exists
+      if (entry.image) {
+        heroImages.push({
+          id: i,
+          image: entry.image,
+          title: entry.title || "",
+          subtitle: entry.subtitle || "",
+        });
+      }
+    }
+
+    if (heroImages.length === 0) {
+      return null;
+    }
+
+    // Cache the result
+    cache.heroImages = { data: heroImages, timestamp: Date.now() };
+    return heroImages;
+  } catch (error) {
+    console.error("Error loading hero images:", error);
+    return null;
+  }
+}
+
+/**
  * Clear cache to force refresh
  */
 export function clearCache() {
   cache.products = { data: null, timestamp: 0 };
   cache.rates = { data: null, timestamp: 0 };
+  cache.heroImages = { data: null, timestamp: 0 };
 }
 
 /**
