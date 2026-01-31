@@ -123,12 +123,12 @@ export const aboutUsData = {
   // Two founders
   founders: [
     {
-      name: "Hitesh Purohit",
+      name: "Hitesh Rajpurohit",
       title: "Co-Founder",
       image: "/images/founders/hitesh.jpg", // Add your image here
     },
     {
-      name: "Bharat Purohit",
+      name: "Bharat Rajpurohit",
       title: "Co-Founder",
       image: "/images/founders/bharat.jpg", // Add your image here
     },
@@ -143,7 +143,7 @@ Every piece at KP Jewellers is crafted with love, precision, and the finest mate
       description: "All our jewellery comes with BIS Hallmark certification ensuring purity and authenticity.",
     },
     {
-      title: "Lifetime Exchange",
+      title: "Exchange Available",
       description: "We offer lifetime exchange on all gold and diamond jewellery at current market rates.",
     },
     {

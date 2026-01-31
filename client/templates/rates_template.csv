@@ -1,9 +1,9 @@
-material,purity,rate
-gold,14K,4500
-gold,18K,5200
-gold,22K,6400
-gold,24K,7200
-silver,925,85
-silver,999,95
-platinum,950,3200
-platinum,999,3800
+material,purity,rate,unit
+gold,14K,4500,per gram
+gold,18K,5200,per gram
+gold,22K,6400,per gram
+gold,24K,7200,per gram
+silver,925,85000,per KG
+silver,999,95000,per KG
+platinum,950,3200,per gram
+platinum,999,3800,per gram

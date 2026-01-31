@@ -1,33 +1,48 @@
 /**
  * Calculate product price based on weight, material rates, and charges
- * Formula: (weight × metalRate) + (weight × makingCharge) + stoneCharge + GST
+ * 
+ * Formula: (weight × rate) + makingCharge + otherCharge + GST - discount
+ * 
+ * Rate Units:
+ * - Gold: per gram
+ * - Platinum: per gram
+ * - Silver: per KG (converted to per gram internally)
+ * 
+ * All charges (makingCharge, otherCharge, discount) are flat amounts from CSV
+ * GST is a percentage from CSV (optional, defaults to 0)
  */
 export function calculatePrice({
   weight,
   purity,
   material,
-  makingChargePerGram,
-  stoneCharge,
-  gstPercent,
+  makingCharge = 0,      // Flat amount from CSV
+  otherCharge = 0,       // Flat amount from CSV
+  gstPercent = 0,        // Percentage from CSV (optional)
+  discount = 0,          // Flat amount from CSV
   rates,
 }) {
   // Get metal rate for the material and purity
-  const metalRate = rates[material]?.[purity] || 0;
+  let metalRate = rates[material]?.[purity] || 0;
+
+  // Silver rate is per KG, convert to per gram
+  if (material === "silver") {
+    metalRate = metalRate / 1000;
+  }
 
   // Calculate components
   const metalPrice = weight * metalRate;
-  const makingCharge = weight * makingChargePerGram;
-  const subtotal = metalPrice + makingCharge + stoneCharge;
-  const gst = subtotal * (gstPercent / 100);
-  const total = subtotal + gst;
+  const subtotal = metalPrice + makingCharge + otherCharge;
+  const gst = gstPercent > 0 ? subtotal * (gstPercent / 100) : 0;
+  const total = subtotal + gst - discount;
 
   return {
     metalPrice: Math.round(metalPrice),
     makingCharge: Math.round(makingCharge),
-    stoneCharge: Math.round(stoneCharge),
+    otherCharge: Math.round(otherCharge),
     gst: Math.round(gst),
+    discount: Math.round(discount),
     subtotal: Math.round(subtotal),
-    total: Math.round(total),
+    total: Math.round(Math.max(0, total)), // Ensure total is never negative
   };
 }
 
@@ -40,6 +55,22 @@ export function formatPrice(amount) {
     currency: "INR",
     maximumFractionDigits: 0,
   }).format(amount);
+}
+
+/**
+ * Get price range (2% less to current price)
+ * @param {number} price - Current price
+ * @returns {object} - { min, max, display }
+ */
+export function getPriceRangeDisplay(price) {
+  const max = Math.round(price);
+  const min = Math.round(price * 0.98); // 2% less
+  
+  return {
+    min,
+    max,
+    display: `${formatPrice(min)} - ${formatPrice(max)}`,
+  };
 }
 
 /**

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import {
   FaSearch,
   FaWhatsapp,
@@ -10,8 +10,9 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import { Drawer } from "@mui/material";
-import { navItems } from "../constants/data";
 import { Link, useNavigate } from "react-router-dom";
+import { useProducts } from "../hooks/useProducts";
+import { buildNavigation, getStaticNavigation } from "../utils/navigationBuilder";
 
 const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -22,6 +23,17 @@ const Header = () => {
   const [showVoiceHint, setShowVoiceHint] = useState(false);
   const [expandedMenus, setExpandedMenus] = useState({});
   const navigate = useNavigate();
+  
+  // Get products for dynamic navigation
+  const { products, loading: productsLoading } = useProducts();
+  
+  // Build dynamic navigation from products
+  const navItems = useMemo(() => {
+    if (productsLoading || !products || products.length === 0) {
+      return getStaticNavigation(); // Use static fallback while loading
+    }
+    return buildNavigation(products);
+  }, [products, productsLoading]);
 
   // Toggle menu expand/collapse
   const toggleMenu = (idx) => {
@@ -123,7 +135,7 @@ const Header = () => {
         {/* Top Announcement Bar - Hidden on mobile */}
         <div className="hidden md:block bg-gray-900 text-white text-center py-2 text-sm">
           <span className="text-amber-400">✨</span> Free Shipping on Orders Above ₹50,000 | 
-          <span className="text-amber-400 ml-1">Lifetime Exchange Available</span>
+          <span className="text-amber-400 ml-1">Exchange Available</span>
         </div>
 
         {/* Main Header */}

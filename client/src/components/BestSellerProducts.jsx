@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { useProducts } from "../hooks/useProducts";
-import { formatPrice } from "../utils/priceCalculator";
+import { formatPrice, getPriceRangeDisplay } from "../utils/priceCalculator";
 import { DEFAULTS } from "../config/defaults";
 import { FaChevronLeft, FaChevronRight, FaHeart, FaShoppingBag } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
@@ -143,8 +143,8 @@ const BestSellerProducts = () => {
 
 // Elegant Product Card - Optimized for mobile
 const ProductCard = ({ product }) => {
-  const minPrice = product.priceRange?.min || 0;
-  const maxPrice = product.priceRange?.max || 0;
+  const basePrice = product.priceRange?.min || 0;
+  const priceRange = getPriceRangeDisplay(basePrice);
   const variant = product.variants[0];
   const hasMultipleVariants = product.variants.length > 1;
 
@@ -220,15 +220,15 @@ const ProductCard = ({ product }) => {
             {variant?.weight}g • {variant?.purity}
           </p>
 
-          {/* Price */}
+          {/* Price Range (2% less - current) */}
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-base sm:text-lg md:text-xl font-bold text-gray-900">
-                {formatPrice(minPrice)}
+              <p className="text-sm sm:text-base md:text-lg font-bold text-gray-900">
+                {priceRange.display}
               </p>
-              {minPrice !== maxPrice && (
+              {hasMultipleVariants && (
                 <p className="text-[10px] sm:text-xs text-gray-400">
-                  to {formatPrice(maxPrice)}
+                  {product.variants.length} variants
                 </p>
               )}
             </div>

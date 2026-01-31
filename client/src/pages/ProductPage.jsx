@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useProduct } from "../hooks/useProducts";
-import { formatPrice } from "../utils/priceCalculator";
+import { formatPrice, getPriceRangeDisplay } from "../utils/priceCalculator";
 import { DEFAULTS } from "../config/defaults";
 import { FaWhatsapp, FaArrowLeft, FaCheck } from "react-icons/fa";
 import SectionHeading from "../components/SectionHeading";
@@ -48,8 +48,9 @@ const ProductPage = () => {
   const hasMultipleVariants = product.variants.length > 1;
 
   // Generate WhatsApp message
+  const priceRangeText = getPriceRangeDisplay(selectedVariant.price.total).display;
   const whatsappMessage = encodeURIComponent(
-    `Hi! I'm interested in ${product.name} (${selectedVariant.weight}g, ${selectedVariant.purity}). Price: ${formatPrice(selectedVariant.price.total)}. Please share more details.`
+    `Hi! I'm interested in ${product.name} (${selectedVariant.weight}g, ${selectedVariant.purity}). Price Range: ${priceRangeText}. Please share more details.`
   );
 
   return (
@@ -110,14 +111,17 @@ const ProductPage = () => {
               {product.materialDisplay} {product.categoryDisplay}
             </p>
 
-            {/* Price Display */}
+            {/* Price Display (2% less - current) */}
             <div className="bg-gradient-to-r from-amber-100 to-amber-50 rounded-xl p-6 mb-6">
-              <p className="text-4xl font-bold text-amber-600 mb-2">
-                {formatPrice(selectedVariant.price.total)}
+              <p className="text-3xl md:text-4xl font-bold text-amber-600 mb-2">
+                {getPriceRangeDisplay(selectedVariant.price.total).display}
               </p>
               <p className="text-sm text-gray-600">
                 {selectedVariant.weight}g • {selectedVariant.purity}
                 {selectedVariant.size && ` • Size ${selectedVariant.size}`}
+              </p>
+              <p className="text-xs text-gray-400 mt-1">
+                *Price may vary based on market rates
               </p>
             </div>
 
@@ -149,8 +153,8 @@ const ProductPage = () => {
                           </span>
                         )}
                       </div>
-                      <p className="text-sm text-amber-600 font-medium mt-1">
-                        {formatPrice(variant.price.total)}
+                      <p className="text-xs text-amber-600 font-medium mt-1">
+                        {getPriceRangeDisplay(variant.price.total).display}
                       </p>
                     </button>
                   ))}
@@ -164,41 +168,65 @@ const ProductPage = () => {
                 Price Breakdown
               </h3>
               <div className="space-y-3">
+                {/* Metal Price */}
                 <div className="flex justify-between text-gray-600">
                   <span>
-                    {product.materialDisplay} ({selectedVariant.purity}) ×{" "}
-                    {selectedVariant.weight}g
+                    {product.materialDisplay} ({selectedVariant.purity}) × {selectedVariant.weight}g
                   </span>
                   <span className="font-medium">
                     {formatPrice(selectedVariant.price.metalPrice)}
                   </span>
                 </div>
-                <div className="flex justify-between text-gray-600">
-                  <span>Making Charges</span>
-                  <span className="font-medium">
-                    {formatPrice(selectedVariant.price.makingCharge)}
-                  </span>
-                </div>
-                {selectedVariant.price.stoneCharge > 0 && (
+
+                {/* Making Charges */}
+                {selectedVariant.price.makingCharge > 0 && (
                   <div className="flex justify-between text-gray-600">
-                    <span>Stone Charges</span>
+                    <span>Making Charges</span>
                     <span className="font-medium">
-                      {formatPrice(selectedVariant.price.stoneCharge)}
+                      {formatPrice(selectedVariant.price.makingCharge)}
                     </span>
                   </div>
                 )}
+
+                {/* Other Charges (stone, design, etc.) */}
+                {selectedVariant.price.otherCharge > 0 && (
+                  <div className="flex justify-between text-gray-600">
+                    <span>Other Charges</span>
+                    <span className="font-medium">
+                      {formatPrice(selectedVariant.price.otherCharge)}
+                    </span>
+                  </div>
+                )}
+
+                {/* Subtotal */}
                 <div className="border-t pt-3 flex justify-between text-gray-600">
                   <span>Subtotal</span>
                   <span className="font-medium">
                     {formatPrice(selectedVariant.price.subtotal)}
                   </span>
                 </div>
-                <div className="flex justify-between text-gray-600">
-                  <span>GST (3%)</span>
-                  <span className="font-medium">
-                    {formatPrice(selectedVariant.price.gst)}
-                  </span>
-                </div>
+
+                {/* GST (only show if > 0) */}
+                {selectedVariant.price.gst > 0 && (
+                  <div className="flex justify-between text-gray-600">
+                    <span>GST ({product.gstPercent || 3}%)</span>
+                    <span className="font-medium">
+                      {formatPrice(selectedVariant.price.gst)}
+                    </span>
+                  </div>
+                )}
+
+                {/* Discount (only show if > 0) */}
+                {selectedVariant.price.discount > 0 && (
+                  <div className="flex justify-between text-green-600">
+                    <span>Discount</span>
+                    <span className="font-medium">
+                      - {formatPrice(selectedVariant.price.discount)}
+                    </span>
+                  </div>
+                )}
+
+                {/* Total */}
                 <div className="border-t pt-3 flex justify-between text-lg font-bold text-amber-600">
                   <span>Total</span>
                   <span>{formatPrice(selectedVariant.price.total)}</span>

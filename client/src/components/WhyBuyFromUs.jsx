@@ -10,7 +10,7 @@ const features = [
   },
   {
     icon: FaRedo,
-    title: "Lifetime Exchange",
+    title: "Exchange Available",
     description: "Exchange your old jewellery at best market rates anytime",
     color: "from-emerald-400 to-emerald-600",
     shadowColor: "shadow-emerald-200",

@@ -32,15 +32,15 @@ export const GOOGLE_SHEETS_CONFIG = {
   // Get these from File → Share → Publish to web
   
   // Products tab published URL (gid=0)
-  productsUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQAp60CQuzqk1Bv00iiK74GTvgkoE77XyD-rHYd2ULrdEc0mQdhwc2hzEHIgHHiv42EDd2YMSXHmYKh/pub?gid=0&single=true&output=csv",
+  productsUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-iesVJiE0BWOu3HWOHmvynML4jAAMRisR8rPmNU5tpiTa_SDrfxIvz12HxbW1R0Wmswrl4uJatptd/pub?output=csv",
   
   // Rates tab published URL (change gid to your rates tab)
-  ratesUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSZvpPm_9VLS7SdjBcqvRZuK102UGLheks-BUN18SrUQwHrytZfzcoyL3R0QE72PU6az_aP-41zgK_C/pub?gid=616740870&single=true&output=csv",
+  ratesUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ9jspGm5ketXry-9w4dsirNc9YSkELMOVvGXgurKzVc7m1lEPPLggBas-c4LGlmcobq9HlNJj3Qvw-/pub?output=csv",
   
   // Hero Images tab published URL (OPTIONAL - leave empty to use default images)
   // Create a new tab in your sheet with columns: image, title, subtitle
   // Then publish that specific tab and paste the URL here
-  heroImagesUrl: "",
+  heroImagesUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQAmMBQLZrjdwkoK08ryiNFDRqDHjE1F3q27Z6-F68ArP3lSaUf1B52uuTxMi0LLm1LObMKBEQ3q6fw/pub?output=csv",
   
   // Cache duration in milliseconds (5 minutes = 300000)
   // Set to 0 to always fetch fresh data

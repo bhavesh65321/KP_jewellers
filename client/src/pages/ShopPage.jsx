@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { useFilteredProducts } from "../hooks/useProducts";
 import { DEFAULTS } from "../config/defaults";
-import { formatPrice } from "../utils/priceCalculator";
+import { formatPrice, getPriceRangeDisplay } from "../utils/priceCalculator";
 import { prettifySlug } from "../utils/parseProduct";
 import { FaTimes, FaFilter, FaThLarge, FaList, FaHeart, FaShoppingBag, FaSync } from "react-icons/fa";
 
@@ -373,6 +373,7 @@ const ShopPage = () => {
 // Grid Card
 const ProductCardGrid = ({ product }) => {
   const price = product.priceRange?.min || 0;
+  const priceRange = getPriceRangeDisplay(price);
 
   return (
     <Link to={`/product/${product.id}`} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
@@ -407,7 +408,7 @@ const ProductCardGrid = ({ product }) => {
           {product.name}
         </h3>
         <div className="flex items-center justify-between mt-2">
-          <p className="text-amber-600 font-bold">{formatPrice(price)}</p>
+          <p className="text-amber-600 font-bold text-sm">{priceRange.display}</p>
           <p className="text-xs text-gray-400">{product.variants[0]?.weight}g</p>
         </div>
       </div>
@@ -418,6 +419,7 @@ const ProductCardGrid = ({ product }) => {
 // List Card
 const ProductCardList = ({ product }) => {
   const price = product.priceRange?.min || 0;
+  const priceRange = getPriceRangeDisplay(price);
 
   return (
     <Link to={`/product/${product.id}`} className="group flex bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all">
@@ -441,7 +443,7 @@ const ProductCardList = ({ product }) => {
         </h3>
         <p className="text-sm text-gray-500 mt-1">Weight: {product.variants[0]?.weight}g</p>
         <div className="flex items-center justify-between mt-3">
-          <p className="text-lg text-amber-600 font-bold">{formatPrice(price)}</p>
+          <p className="text-base text-amber-600 font-bold">{priceRange.display}</p>
           <span className="hidden md:inline-block px-4 py-1.5 border border-amber-500 text-amber-600 rounded-full text-sm font-medium group-hover:bg-amber-500 group-hover:text-white transition">
             View Details
           </span>

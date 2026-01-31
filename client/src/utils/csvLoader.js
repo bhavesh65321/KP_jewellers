@@ -52,7 +52,40 @@ export async function loadProductsCSV() {
 }
 
 /**
- * Load rates - from Google Sheets or local file
+ * Convert CSV rows to rates object
+ * Expected CSV format: material, purity, rate
+ */
+function parseRatesCSV(csvData) {
+  const rates = {
+    gold: {},
+    silver: {},
+    platinum: {},
+    lastUpdated: new Date().toISOString().split("T")[0],
+  };
+
+  csvData.forEach((row) => {
+    const material = row.material?.toLowerCase();
+    const purity = row.purity?.toUpperCase();
+    const rate = parseFloat(row.rate) || 0;
+
+    if (material && purity) {
+      // Initialize material object if it doesn't exist
+      if (!rates[material]) {
+        rates[material] = {};
+      }
+      rates[material][purity] = rate;
+    }
+  });
+
+  return rates;
+}
+
+/**
+ * Load rates - from Google Sheets or local CSV file
+ * CSV Format: material, purity, rate
+ * Example: gold, 22K, 6400
+ * 
+ * Note: Silver rate should be per KG, Gold/Platinum per gram
  */
 export async function loadRates() {
   // Check cache first
@@ -60,57 +93,54 @@ export async function loadRates() {
     return cache.rates.data;
   }
 
+  // Check localStorage for admin-saved rates first
+  const savedRates = localStorage.getItem("kp_jewellers_rates");
+  if (savedRates) {
+    try {
+      const parsed = JSON.parse(savedRates);
+      if (parsed && parsed.gold) {
+        cache.rates = { data: parsed, timestamp: Date.now() };
+        return parsed;
+      }
+    } catch (e) {
+      console.warn("Invalid localStorage rates");
+    }
+  }
+
+  let url;
+
   if (isGoogleSheetsConfigured()) {
     // Load rates from Google Sheets
-    const url = getRatesCSVUrl();
-    
+    url = getRatesCSVUrl();
+  } else {
+    // Load from local CSV file
+    url = "/data/rates.csv";
+  }
+
+  try {
     const csvData = await loadCSV(url, false);
     
-    // Convert CSV rows to rates object
-    // Expected format: material, purity, rate
-    const rates = {
-      gold: {},
-      silver: {},
-      platinum: {},
-      lastUpdated: new Date().toISOString().split("T")[0],
-    };
-    
-    csvData.forEach((row) => {
-      const material = row.material?.toLowerCase();
-      const purity = row.purity?.toUpperCase();
-      const rate = parseFloat(row.rate) || 0;
+    if (csvData && csvData.length > 0) {
+      const rates = parseRatesCSV(csvData);
       
-      if (material && purity && rates[material] !== undefined) {
-        rates[material][purity] = rate;
-      }
-    });
-    
-    // Cache the result
-    cache.rates = { data: rates, timestamp: Date.now() };
-    
-    return rates;
-  } else {
-    // Load from local file or localStorage
-    const savedRates = localStorage.getItem("kp_jewellers_rates");
-    if (savedRates) {
-      try {
-        const parsed = JSON.parse(savedRates);
-        if (parsed && parsed.gold) {
-          cache.rates = { data: parsed, timestamp: Date.now() };
-          return parsed;
-        }
-      } catch (e) {
-        console.warn("Invalid localStorage rates");
-      }
+      // Cache the result
+      cache.rates = { data: rates, timestamp: Date.now() };
+      return rates;
     }
-    
-    // Fallback to rates.json
-    const response = await fetch("/data/rates.json");
-    const rates = await response.json();
-    
-    cache.rates = { data: rates, timestamp: Date.now() };
-    return rates;
+  } catch (error) {
+    console.warn("Failed to load rates CSV:", error);
   }
+
+  // Final fallback - return default rates
+  const defaultRates = {
+    gold: { "18K": 5200, "22K": 6400, "24K": 7200 },
+    silver: { "925": 85000, "999": 95000 },
+    platinum: { "950": 3200 },
+    lastUpdated: new Date().toISOString().split("T")[0],
+  };
+
+  cache.rates = { data: defaultRates, timestamp: Date.now() };
+  return defaultRates;
 }
 
 /**
@@ -245,14 +275,27 @@ export function parseCSV(csvText) {
     headers.forEach((header, index) => {
       const value = values[index]?.trim() || "";
 
-      // Convert numeric fields
-      if (header === "weight" || header === "stonecharge" || header === "rate") {
-        entry[header === "stonecharge" ? "stoneCharge" : header] = value ? parseFloat(value) : null;
-      } else if (header === "size") {
+      // Normalize header names (remove spaces, lowercase)
+      const normalizedHeader = header.toLowerCase().replace(/\s+/g, "");
+
+      // Map of numeric fields (CSV header -> object key)
+      const numericFields = {
+        weight: "weight",
+        rate: "rate",
+        makingcharge: "makingCharge",
+        othercharge: "otherCharge",
+        gst: "gst",
+        discount: "discount",
+        stonecharge: "stoneCharge", // Legacy support
+      };
+
+      if (numericFields[normalizedHeader]) {
+        entry[numericFields[normalizedHeader]] = value ? parseFloat(value) : null;
+      } else if (normalizedHeader === "size") {
         // Size can be number or string (e.g., "M", "L")
-        entry[header] = value || null;
+        entry.size = value || null;
       } else {
-        entry[header] = value || null;
+        entry[normalizedHeader] = value || null;
       }
     });
 

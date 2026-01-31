@@ -26,7 +26,7 @@ import { aboutUsData } from "../constants/data";
 // Icon and color mapping for features
 const featureConfig = {
   "100% Certified": { icon: FaCertificate, color: "from-amber-400 to-amber-600", shadow: "shadow-amber-200" },
-  "Lifetime Exchange": { icon: FaExchangeAlt, color: "from-emerald-400 to-emerald-600", shadow: "shadow-emerald-200" },
+  "Exchange Available": { icon: FaExchangeAlt, color: "from-emerald-400 to-emerald-600", shadow: "shadow-emerald-200" },
   "Custom Designs": { icon: FaPencilRuler, color: "from-blue-400 to-blue-600", shadow: "shadow-blue-200" },
   "Transparent Pricing": { icon: FaHandHoldingUsd, color: "from-purple-400 to-purple-600", shadow: "shadow-purple-200" },
 };

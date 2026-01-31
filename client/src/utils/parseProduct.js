@@ -39,7 +39,29 @@ export function parseProductId(id) {
 }
 
 /**
+ * Parse numeric value from CSV (handles empty strings, null, undefined)
+ */
+function parseNumber(value, defaultValue = 0) {
+  if (value === null || value === undefined || value === "") {
+    return defaultValue;
+  }
+  const num = parseFloat(value);
+  return isNaN(num) ? defaultValue : num;
+}
+
+/**
  * Parse a single CSV entry into a full product object
+ * 
+ * CSV Fields:
+ * - id: Product ID (material-category-name)
+ * - weight: Weight in grams
+ * - size: Size (optional)
+ * - purity: Purity (22K, 24K, 925, 950, etc.)
+ * - image: Image URL (optional)
+ * - makingCharge: Flat making charge amount (optional, default 0)
+ * - otherCharge: Flat other charges amount (optional, default 0)
+ * - gst: GST percentage (optional, default 0)
+ * - discount: Flat discount amount (optional, default 0)
  */
 export function parseProduct(entry, rates) {
   const parsed = parseProductId(entry.id);
@@ -50,13 +72,11 @@ export function parseProduct(entry, rates) {
   // Get purity with fallback to default
   const purity = entry.purity || DEFAULTS.purity[material] || "22K";
 
-  // Get making charge for material
-  const makingChargePerGram =
-    DEFAULTS.makingChargePerGram[material] || DEFAULTS.makingChargePerGram.gold;
-
-  // Get stone charge with fallback to default
-  const stoneCharge =
-    entry.stoneCharge != null ? entry.stoneCharge : DEFAULTS.stoneCharge;
+  // Get charges from CSV (all flat amounts, not per gram)
+  const makingCharge = parseNumber(entry.makingCharge, 0);
+  const otherCharge = parseNumber(entry.otherCharge, 0);
+  const gstPercent = parseNumber(entry.gst, 0);
+  const discount = parseNumber(entry.discount, 0);
 
   // Determine image URL:
   // 1. Use image from CSV if provided (can be Google Drive URL)
@@ -70,12 +90,13 @@ export function parseProduct(entry, rates) {
     material,
     category,
     name,
-    weight: entry.weight,
+    weight: parseNumber(entry.weight, 0),
     size: entry.size,
     purity,
-    stoneCharge,
-    makingChargePerGram,
-    gstPercent: DEFAULTS.gstPercent,
+    makingCharge,
+    otherCharge,
+    gstPercent,
+    discount,
     image,
     // Display names for UI - use defaults or prettify the slug
     materialDisplay: DEFAULTS.materialNames[material] || prettifySlug(material),
@@ -87,9 +108,10 @@ export function parseProduct(entry, rates) {
     weight: product.weight,
     purity: product.purity,
     material: product.material,
-    makingChargePerGram: product.makingChargePerGram,
-    stoneCharge: product.stoneCharge,
+    makingCharge: product.makingCharge,
+    otherCharge: product.otherCharge,
     gstPercent: product.gstPercent,
+    discount: product.discount,
     rates,
   });
 
@@ -120,6 +142,7 @@ export function parseAllProducts(entries, rates) {
         materialDisplay: product.materialDisplay,
         categoryDisplay: product.categoryDisplay,
         image: product.image,
+        gstPercent: product.gstPercent, // For displaying in price breakdown
         variants: [],
       });
     }
